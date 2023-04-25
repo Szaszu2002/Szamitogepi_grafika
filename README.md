@@ -1,0 +1,1 @@
+Egy adott objektummal, ami billentyűzettel mozgatható jobbra és balra el kell kapni más objektumokat és az elkapott objektumok számát letároljuk.
