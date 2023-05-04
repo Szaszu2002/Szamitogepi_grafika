@@ -1,1 +1,1 @@
-Egy nagyobb hallal, ami billentyűzettel mozgatható meg kell fogni a kisebb halakat. Az elkapott halak számát letároljuk és kiíratjuk a képernyőre.
+Egy nagyobb hallal, ami billentyűzettel mozgatható meg kell fogni az 5 kisebb halat. Vagyis, ha a nagy hal megérinti a kis halat, akkor a kishal eltünik és az elkapott halak számához hozzá adódik egy. A halunk le-fel és jobbra-balra tud mozogni. Az elkapott halak számát számlálóval számoljuk és a képernyőn egy téglalapban megjelenítjük.
