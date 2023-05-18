@@ -184,15 +184,22 @@ void render_app(App* app)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
-    glPushMatrix();
+    rend_shark(&(app->scene));
+    //glPushMatrix();
     set_view(&(app->camera));
+    
     render_scene(&(app->scene));
-    glPopMatrix();
-
+    //glPopMatrix();
+    rend_fish1(&(app->scene));
+    rend_fish2(&(app->scene));
+    rend_fish3(&(app->scene));
+    rend_fish4(&(app->scene));
+    rend_fish5(&(app->scene));
+    
     if (app->camera.is_preview_visible) {
         show_texture_preview();
     }
-
+    
     SDL_GL_SwapWindow(app->window);
 }
 

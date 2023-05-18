@@ -8,16 +8,15 @@
 
 typedef struct Scene
 {
-    Model cube;
+    Shark shark;
     Material material;
-    GLuint texture_id;
 } Scene;
 
 /**
  * Initialize the scene by loading models.
  */
 void init_scene(Scene* scene);
-
+void rend_shark(Scene* scene);
 /**
  * Set the lighting of the scene.
  */

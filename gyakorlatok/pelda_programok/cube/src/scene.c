@@ -5,12 +5,7 @@
 
 void init_scene(Scene* scene)
 {
-    load_model(&(scene->cube), "assets/models/cube.obj");
-    scene->texture_id = load_texture("assets/textures/cube.png");
-    //load_model(&(scene->cube), "assets/models/hare.obj");
-    //scene->texture_id = load_texture("assets/texture/hare.jpg");
-
-    glBindTexture(GL_TEXTURE_2D, scene->texture_id);
+    init_shark(&(scene->shark));
 
     scene->material.ambient.red = 0.0;
     scene->material.ambient.green = 0.0;
@@ -26,6 +21,7 @@ void init_scene(Scene* scene)
 
     scene->material.shininess = 0.0;
 }
+
 
 void set_lighting()
 {
@@ -76,7 +72,6 @@ void render_scene(const Scene* scene)
     set_material(&(scene->material));
     set_lighting();
     draw_origin();
-    draw_model(&(scene->cube));
 }
 
 void draw_origin()
@@ -96,4 +91,9 @@ void draw_origin()
     glVertex3f(0, 0, 1);
 
     glEnd();
+}
+
+void rend_shark(Scene* scene)
+{
+    render_shark(&(scene->shark));
 }

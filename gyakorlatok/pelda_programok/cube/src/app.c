@@ -183,7 +183,7 @@ void render_app(App* app)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
-
+    rend_shark(&(app->scene));
     glPushMatrix();
     set_view(&(app->camera));
     render_scene(&(app->scene));

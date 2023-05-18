@@ -8,13 +8,43 @@
 
 typedef struct Scene
 {
-    Model fish;
+    Shark shark;
     Material material;
-    GLuint texture_id;
 } Scene;
 
+/**
+ * Initialize the scene by loading models.
+ */
 void init_scene(Scene* scene);
-
+void rend_shark(Scene* scene);
+void rend_fish1(Scene* scene);
+void rend_fish2(Scene* scene);
+void rend_fish3(Scene* scene);
+void rend_fish4(Scene* scene);
+void rend_fish5(Scene* scene);
+/**
+ * Set the lighting of the scene.
+ */
 void set_lighting();
 
-#endif
+/**
+ * Set the current material.
+ */
+void set_material(const Material* material);
+
+/**
+ * Update the scene.
+ */
+void update_scene(Scene* scene);
+
+/**
+ * Render the scene objects.
+ */
+void render_scene(const Scene* scene);
+
+/**
+ * Draw the origin of the world coordinate system.
+ */
+void draw_origin();
+
+#endif /* SCENE_H */

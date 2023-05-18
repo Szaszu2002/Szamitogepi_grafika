@@ -1,0 +1,2 @@
+all:
+	gcc -Iinclude/ src/app.c src/main.c src/camera.c src/scene.c src/texture.c src/utils.c -o shark.exe -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lobj -lopengl32 -lm -o shark.exe -Wall -Wextra -Wpedantic
