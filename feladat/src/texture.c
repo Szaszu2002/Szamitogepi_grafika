@@ -1,4 +1,5 @@
 #include "texture.h"
+#include <stdbool.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -51,124 +52,81 @@ void init_shark(Shark* shark)
     load_model(&(shark->shark), "assets/models/turtle2.obj");
     shark->texture_id = load_texture("assets/textures/turtle_texture.jpg");
 }
-void init_fish1(Shark* shark)
+void init_fish1(Fish* fish)
 {
-    shark->position.x=3;
-    shark->position.z=3;
-    shark->position.y=3;
+    fish->position.x=3;
+    fish->position.z=3;
+    fish->position.y=3;
+    fish->state=true;
+    fish->rotation.x=0;
+    fish->rotation.y=0;
+    fish->rotation.z=0;
 
-    shark->rotation.x=0;
-    shark->rotation.y=0;
-    shark->rotation.z=0;
-
-    load_model(&(shark->shark), "assets/models/blue_fish.obj");
-    shark->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/blue_fish.obj");
+    fish->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
 }
-void init_fish2(Shark* shark)
+void init_fish2(Fish* fish)
 {
-    shark->position.x=2;
-    shark->position.z=2;
-    shark->position.y=2;
+    fish->position.x=2;
+    fish->position.z=2;
+    fish->position.y=2;
+    fish->state=true;
+    fish->rotation.x=0;
+    fish->rotation.y=0;
+    fish->rotation.z=0;
 
-    shark->rotation.x=0;
-    shark->rotation.y=0;
-    shark->rotation.z=0;
-
-    load_model(&(shark->shark), "assets/models/purple_fish.obj");
-    shark->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/purple_fish.obj");
+    fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
 }
-void init_fish3(Shark* shark)
+void init_fish3(Fish* fish)
 {
-    shark->position.x=4;
-    shark->position.z=4;
-    shark->position.y=4;
+    fish->position.x=4;
+    fish->position.z=4;
+    fish->position.y=4;
+    fish->state=true;
+    fish->rotation.x=0;
+    fish->rotation.y=0;
+    fish->rotation.z=0;
 
-    shark->rotation.x=0;
-    shark->rotation.y=0;
-    shark->rotation.z=0;
-
-    load_model(&(shark->shark), "assets/models/yellow_fish.obj");
-    shark->texture_id = load_texture("assets/textures/yellow_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/yellow_fish.obj");
+    fish->texture_id = load_texture("assets/textures/yellow_fish_texture.jpg");
 }
-void init_fish4(Shark* shark)
+void init_fish4(Fish* fish)
 {
-    shark->position.x=2;
-    shark->position.z=4;
-    shark->position.y=5;
+    fish->position.x=2;
+    fish->position.z=4;
+    fish->position.y=5;
+    fish->state=true;
+    fish->rotation.x=0;
+    fish->rotation.y=0;
+    fish->rotation.z=0;
 
-    shark->rotation.x=0;
-    shark->rotation.y=0;
-    shark->rotation.z=0;
-
-    load_model(&(shark->shark), "assets/models/blue_fish.obj");
-    shark->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/blue_fish.obj");
+    fish->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
 }
-void init_fish5(Shark* shark)
+void init_fish5(Fish* fish)
 {
-    shark->position.x=2;
-    shark->position.z=2;
-    shark->position.y=2;
+    fish->position.x=2;
+    fish->position.z=2;
+    fish->position.y=2;
+    fish->state=true;
+    fish->rotation.x=0;
+    fish->rotation.y=0;
+    fish->rotation.z=0;
 
-    shark->rotation.x=0;
-    shark->rotation.y=0;
-    shark->rotation.z=0;
-
-    load_model(&(shark->shark), "assets/models/purple_fish.obj");
-    shark->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/purple_fish.obj");
+    fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
 }
 
-void render_fish1(const Shark* shark)
+void render_fish(const Fish* fish)
 {
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glBindTexture(GL_TEXTURE_2D, shark->texture_id);
+    glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, fish->texture_id);
 
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
+    glTranslatef(fish->position.x,fish->position.y,fish->position.z);
+    glScalef(2,2,2);
 
-    draw_model(&(shark->shark));
-}
-void render_fish2(const Shark* shark)
-{
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glBindTexture(GL_TEXTURE_2D, shark->texture_id);
-
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
-
-    draw_model(&(shark->shark));
-}
-void render_fish3(const Shark* shark)
-{
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glBindTexture(GL_TEXTURE_2D, shark->texture_id);
-
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
-
-    draw_model(&(shark->shark));
-}
-void render_fish4(const Shark* shark)
-{
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glBindTexture(GL_TEXTURE_2D, shark->texture_id);
-
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
-
-    draw_model(&(shark->shark));
-}
-void render_fish5(const Shark* shark)
-{
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glBindTexture(GL_TEXTURE_2D, shark->texture_id);
-
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
-
-    draw_model(&(shark->shark));
+    draw_model(&(fish->fish));
+    glPopMatrix();
 }

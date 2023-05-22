@@ -6,11 +6,11 @@
 void init_scene(Scene* scene)
 {
     init_shark(&(scene->shark));
-    init_fish1(&(scene->shark));
-    init_fish2(&(scene->shark));
-    init_fish3(&(scene->shark));
-    init_fish4(&(scene->shark));
-    init_fish5(&(scene->shark));
+    init_fish1(&(scene->fish[0]));
+    init_fish2(&(scene->fish[1]));
+    init_fish3(&(scene->fish[2]));
+    init_fish4(&(scene->fish[3]));
+    init_fish5(&(scene->fish[4]));
 
     scene->material.ambient.red = 0.0;
     scene->material.ambient.green = 0.0;
@@ -26,7 +26,7 @@ void init_scene(Scene* scene)
 
     scene->material.shininess = 0.0;
 }
-
+// valós helyzet függvény!!!!
 
 void set_lighting()
 {
@@ -75,6 +75,15 @@ void update_scene(Scene* scene)
 void render_scene(const Scene* scene)
 {
     set_material(&(scene->material));
+    for(int i=0;i<FISH_COUNT;i++)
+    {
+        if(scene->fish[i].state)
+        {
+            render_fish(&(scene->fish[i]));
+        }
+    }
+    
+    
     set_lighting();
     draw_origin();
 }
@@ -101,24 +110,4 @@ void draw_origin()
 void rend_shark(Scene* scene)
 {
     render_shark(&(scene->shark));
-}
-void rend_fish1(Scene* scene)
-{
-    render_fish1(&(scene->shark));
-}
-void rend_fish2(Scene* scene)
-{
-    render_fish2(&(scene->shark));
-}
-void rend_fish3(Scene* scene)
-{
-    render_fish3(&(scene->shark));
-}
-void rend_fish4(Scene* scene)
-{
-    render_fish4(&(scene->shark));
-}
-void rend_fish5(Scene* scene)
-{
-    render_fish5(&(scene->shark));
 }

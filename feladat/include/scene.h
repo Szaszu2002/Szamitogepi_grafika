@@ -5,10 +5,12 @@
 #include "texture.h"
 
 #include <obj/model.h>
-
+#define FISH_COUNT 5
 typedef struct Scene
 {
     Shark shark;
+    Fish fish[FISH_COUNT];
+   
     Material material;
 } Scene;
 
@@ -17,11 +19,7 @@ typedef struct Scene
  */
 void init_scene(Scene* scene);
 void rend_shark(Scene* scene);
-void rend_fish1(Scene* scene);
-void rend_fish2(Scene* scene);
-void rend_fish3(Scene* scene);
-void rend_fish4(Scene* scene);
-void rend_fish5(Scene* scene);
+
 /**
  * Set the lighting of the scene.
  */

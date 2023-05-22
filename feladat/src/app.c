@@ -149,7 +149,8 @@ void handle_app_events(App* app)
         case SDL_MOUSEMOTION:
             SDL_GetMouseState(&x, &y);
             if (is_mouse_down) {
-                rotate_camera(&(app->camera), mouse_x - x, mouse_y - y);
+                rotate_camera(&(app->camera), mouse_x - x, mouse_y - y); 
+                //mozdító függvény helye!!! (shark)
             }
             mouse_x = x;
             mouse_y = y;
@@ -177,6 +178,7 @@ void update_app(App* app)
 
     update_camera(&(app->camera), elapsed_time);
     update_scene(&(app->scene));
+    // valós helyzet függvény
 }
 
 void render_app(App* app)
@@ -190,11 +192,6 @@ void render_app(App* app)
     
     render_scene(&(app->scene));
     //glPopMatrix();
-    rend_fish1(&(app->scene));
-    rend_fish2(&(app->scene));
-    rend_fish3(&(app->scene));
-    rend_fish4(&(app->scene));
-    rend_fish5(&(app->scene));
     
     if (app->camera.is_preview_visible) {
         show_texture_preview();
