@@ -55,8 +55,8 @@ void init_shark(Shark* shark)
 void init_fish1(Fish* fish)
 {
     fish->position.x=3;
-    fish->position.z=3;
-    fish->position.y=3;
+    fish->position.z=2;
+    fish->position.y=1;
     fish->state=true;
     fish->rotation.x=0;
     fish->rotation.y=0;
@@ -67,22 +67,24 @@ void init_fish1(Fish* fish)
 }
 void init_fish2(Fish* fish)
 {
-    fish->position.x=2;
+    fish->position.x=1;
     fish->position.z=2;
-    fish->position.y=2;
+    fish->position.y=-4;
     fish->state=true;
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
 
-    load_model(&(fish->fish), "assets/models/purple_fish.obj");
-    fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    //load_model(&(fish->fish), "assets/models/purple_fish.obj");
+    //fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/yellow_fish.obj");
+    fish->texture_id = load_texture("assets/textures/yellow_fish_texture.jpg");
 }
 void init_fish3(Fish* fish)
 {
     fish->position.x=4;
-    fish->position.z=4;
-    fish->position.y=4;
+    fish->position.z=1;
+    fish->position.y=5;
     fish->state=true;
     fish->rotation.x=0;
     fish->rotation.y=0;
@@ -93,9 +95,9 @@ void init_fish3(Fish* fish)
 }
 void init_fish4(Fish* fish)
 {
-    fish->position.x=2;
+    fish->position.x=1;
     fish->position.z=4;
-    fish->position.y=5;
+    fish->position.y=1;
     fish->state=true;
     fish->rotation.x=0;
     fish->rotation.y=0;
@@ -107,15 +109,17 @@ void init_fish4(Fish* fish)
 void init_fish5(Fish* fish)
 {
     fish->position.x=2;
-    fish->position.z=2;
+    fish->position.z=5;
     fish->position.y=2;
     fish->state=true;
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
 
-    load_model(&(fish->fish), "assets/models/purple_fish.obj");
-    fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    //load_model(&(fish->fish), "assets/models/purple_fish.obj");
+    //fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
+    load_model(&(fish->fish), "assets/models/yellow_fish.obj");
+    fish->texture_id = load_texture("assets/textures/yellow_fish_texture.jpg");
 }
 
 void render_fish(const Fish* fish)
@@ -125,7 +129,7 @@ void render_fish(const Fish* fish)
     glBindTexture(GL_TEXTURE_2D, fish->texture_id);
 
     glTranslatef(fish->position.x,fish->position.y,fish->position.z);
-    glScalef(2,2,2);
+    glScalef(0.2,0.2,0.2);
 
     draw_model(&(fish->fish));
     glPopMatrix();
