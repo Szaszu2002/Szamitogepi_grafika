@@ -11,6 +11,10 @@ void init_scene(Scene* scene)
     init_fish3(&(scene->fish[2]));
     init_fish4(&(scene->fish[3]));
     init_fish5(&(scene->fish[4]));
+    init_other1(&(scene->other[0]));
+    init_other2(&(scene->other[1]));
+    init_other3(&(scene->other[2]));
+    init_other4(&(scene->other[3]));
 
     scene->material.ambient.red = 0.0;
     scene->material.ambient.green = 0.0;
@@ -81,6 +85,10 @@ void render_scene(const Scene* scene)
         {
             render_fish(&(scene->fish[i]));
         }
+    }
+    for(int i=0;i<OTHER_COUNT;i++)
+    {
+        render_other(&(scene->other[i]));
     }
     
     

@@ -5,12 +5,15 @@
 #include "texture.h"
 
 #include <obj/model.h>
+
 #define FISH_COUNT 5
+#define OTHER_COUNT 4
+
 typedef struct Scene
 {
     Shark shark;
     Fish fish[FISH_COUNT];
-   
+    Other other[OTHER_COUNT];
     Material material;
 } Scene;
 

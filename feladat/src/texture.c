@@ -32,7 +32,7 @@ void render_shark(const Shark* shark)
     glBindTexture(GL_TEXTURE_2D, shark->texture_id);
 
     glTranslatef(shark->position.x,shark->position.y,shark->position.z);
-    glScalef(0.01,0.01,0.01);
+    glScalef(0.05,0.05,0.05);
 
     draw_model(&(shark->shark));
     //glPopMatrix();
@@ -49,8 +49,8 @@ void init_shark(Shark* shark)
     shark->rotation.y=0;
     shark->rotation.z=0;
 
-    load_model(&(shark->shark), "assets/models/turtle2.obj");
-    shark->texture_id = load_texture("assets/textures/turtle_texture.jpg");
+    load_model(&(shark->shark), "assets/models/whale.obj");
+    shark->texture_id = load_texture("assets/textures/whale.jpg");
 }
 void init_fish1(Fish* fish)
 {
@@ -132,5 +132,69 @@ void render_fish(const Fish* fish)
     glScalef(0.2,0.2,0.2);
 
     draw_model(&(fish->fish));
+    glPopMatrix();
+}
+void init_other1(Other* other)
+{
+    other->position.x=-6;
+    other->position.z=7;
+    other->position.y=-7;
+
+    other->rotation.x=0;
+    other->rotation.y=0;
+    other->rotation.z=0;
+
+    load_model(&(other->other), "assets/models/turtle2.obj");
+    other->texture_id = load_texture("assets/textures/turtle_texture.jpg");
+}
+void init_other2(Other* other)
+{
+    other->position.x=4;
+    other->position.z=-5;
+    other->position.y=-3;
+
+    other->rotation.x=0;
+    other->rotation.y=0;
+    other->rotation.z=0;
+
+    load_model(&(other->other), "assets/models/red_coral.obj");
+    other->texture_id = load_texture("assets/textures/red_coral_texture.jpg");
+}
+void init_other3(Other* other)
+{
+    other->position.x=-2;
+    other->position.z=-3;
+    other->position.y=6;
+
+    other->rotation.x=0;
+    other->rotation.y=0;
+    other->rotation.z=0;
+
+    load_model(&(other->other), "assets/models/seahorse.obj");
+    other->texture_id = load_texture("assets/textures/seahorse_texture.jpg");
+}
+void init_other4(Other* other)
+{
+    other->position.x=-4;
+    other->position.z=-5;
+    other->position.y=-7;
+
+    other->rotation.x=0;
+    other->rotation.y=0;
+    other->rotation.z=0;
+
+    load_model(&(other->other), "assets/models/shell.obj");
+    other->texture_id = load_texture("assets/textures/shell.jpg");
+}
+void render_other(const Other* other)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, other->texture_id);
+
+    glTranslatef(other->position.x,other->position.y,other->position.z);
+    glScalef(0.1,0.1,0.1);
+
+    draw_model(&(other->other));
     glPopMatrix();
 }
