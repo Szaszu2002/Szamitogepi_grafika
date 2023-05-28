@@ -74,6 +74,7 @@ void set_material(const Material* material)
 
 void update_scene(Scene* scene)
 {
+    touch_fish(scene);
 }
 
 void render_scene(const Scene* scene)
@@ -118,4 +119,16 @@ void draw_origin()
 void rend_shark(Scene* scene)
 {
     render_shark(&(scene->shark));
+}
+void touch_fish(Scene* scene)
+{
+    for(int i=0;i<5;i++)
+    {
+        if(scene->fish[i].state && touch(&(scene->shark),&(scene->fish[i])))
+        {
+            scene->fish[i].state=false;
+            scene->shark.point++;
+            //printf("\n %lf : %lf : %lf",scene->shark.real_position.x,scene->shark.real_position.y, scene->shark.real_position.z);
+        }
+    }
 }

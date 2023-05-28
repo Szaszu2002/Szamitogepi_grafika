@@ -6,20 +6,26 @@
 #include <GL/gl.h>
 #include <stdbool.h>
 
+
 typedef struct Shark
 {
-    vec3 position;
     vec3 rotation;
     int texture_id;
+    vec3 real_position;
+    vec3 relative_position;
+    float direction;
     Model shark;
+    int point;
 } Shark;
 typedef struct Fish
 {
     vec3 position;
     vec3 rotation;
+    float scale;
     int texture_id;
     bool state;
     Model fish;
+    
 } Fish;
 typedef struct Other
 {
@@ -45,5 +51,8 @@ GLuint load_texture_shark(char* filename);
 void render_shark(const Shark* shark);
 void render_fish(const Fish* fish);
 void render_other(const Other* other);
+void update_shark_position(Shark* shark, const vec3* camera_position);
+void update_shark_rotation(Shark* shark, const vec3* camera_rotation);
+bool touch(Shark* shark, Fish* fish);
 
 #endif

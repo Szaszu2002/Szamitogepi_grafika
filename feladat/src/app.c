@@ -40,8 +40,9 @@ void init_app(App* app, int width, int height)
     init_opengl();
     reshape(width, height);
 
-    init_camera(&(app->camera));
     init_scene(&(app->scene));
+    init_camera(&(app->camera), &(app->scene.shark));
+    
 
     app->is_running = true;
 }
@@ -125,6 +126,12 @@ void handle_app_events(App* app)
             case SDL_SCANCODE_D:
                 set_camera_side_speed(&(app->camera), -1);
                 break;
+            case SDL_SCANCODE_K:
+                set_camera_vertical_speed(&(app->camera), 1);
+                break;
+            case SDL_SCANCODE_L:
+                set_camera_vertical_speed(&(app->camera), -1);
+                break;
             default:
                 break;
             }
@@ -139,6 +146,10 @@ void handle_app_events(App* app)
             case SDL_SCANCODE_D:
                 set_camera_side_speed(&(app->camera), 0);
                 break;
+            case SDL_SCANCODE_K:
+            case SDL_SCANCODE_L:
+                set_camera_vertical_speed(&(app->camera), 0);
+                break;
             default:
                 break;
             }
@@ -151,6 +162,7 @@ void handle_app_events(App* app)
             if (is_mouse_down) {
                 rotate_camera(&(app->camera), mouse_x - x, mouse_y - y); 
                 //mozdító függvény helye!!! (shark)
+                rotate_around_shark(&(app->camera), mouse_x-x);
             }
             mouse_x = x;
             mouse_y = y;
@@ -179,7 +191,10 @@ void update_app(App* app)
     update_camera(&(app->camera), elapsed_time);
     update_scene(&(app->scene));
     // valós helyzet függvény
+    update_shark_position(&(app->scene.shark), &(app->camera.position));
+    update_shark_rotation(&(app->scene.shark), &(app->camera.rotation));
 }
+
 
 void render_app(App* app)
 {

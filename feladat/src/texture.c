@@ -1,5 +1,6 @@
 #include "texture.h"
 #include <stdbool.h>
+#include <math.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -31,26 +32,49 @@ void render_shark(const Shark* shark)
     glLoadIdentity();
     glBindTexture(GL_TEXTURE_2D, shark->texture_id);
 
-    glTranslatef(shark->position.x,shark->position.y,shark->position.z);
+    glTranslatef(shark->relative_position.x,shark->relative_position.y,shark->relative_position.z);
     glScalef(0.05,0.05,0.05);
 
     draw_model(&(shark->shark));
     //glPopMatrix();
-    //printf("Hello");
+    //printf("\nPosition: %lf : %lf ",shark->real_position.x,shark->real_position.z);
     
 }
 void init_shark(Shark* shark)
 {
-    shark->position.x=0;
-    shark->position.z=-1;
-    shark->position.y=0;
+    shark->relative_position.x=0;
+    shark->relative_position.z=-1;
+    shark->relative_position.y=0;
+
+    shark->real_position.x=0;
+    shark->real_position.z=0;
+    shark->real_position.y=0;
 
     shark->rotation.x=0;
     shark->rotation.y=0;
     shark->rotation.z=0;
 
+    shark->point=0;
+
+    shark->direction=0;
+
     load_model(&(shark->shark), "assets/models/whale.obj");
     shark->texture_id = load_texture("assets/textures/whale.jpg");
+}
+void update_shark_position(Shark* shark, const vec3* camera_position)
+{
+    double rotation_angle = degree_to_radian(shark->direction);
+    float cam_x = camera_position->x;
+    float cam_y = camera_position->y;
+    float cam_z = camera_position->z;
+
+    shark->real_position.x=cam_x - sin(rotation_angle) * shark->relative_position.z;
+    shark->real_position.z=cam_y + cos(rotation_angle) * shark->relative_position.z;
+    shark->real_position.y=cam_z;
+}
+void update_shark_rotation(Shark* shark, const vec3* camera_rotation)
+{
+    shark->direction =camera_rotation->z+90;
 }
 void init_fish1(Fish* fish)
 {
@@ -61,7 +85,7 @@ void init_fish1(Fish* fish)
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
-
+    fish->scale=0.2;
     load_model(&(fish->fish), "assets/models/blue_fish.obj");
     fish->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
 }
@@ -74,7 +98,7 @@ void init_fish2(Fish* fish)
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
-
+    fish->scale=0.2;
     //load_model(&(fish->fish), "assets/models/purple_fish.obj");
     //fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
     load_model(&(fish->fish), "assets/models/yellow_fish.obj");
@@ -89,7 +113,7 @@ void init_fish3(Fish* fish)
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
-
+    fish->scale=0.2;
     load_model(&(fish->fish), "assets/models/yellow_fish.obj");
     fish->texture_id = load_texture("assets/textures/yellow_fish_texture.jpg");
 }
@@ -102,7 +126,7 @@ void init_fish4(Fish* fish)
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
-
+    fish->scale=0.2;
     load_model(&(fish->fish), "assets/models/blue_fish.obj");
     fish->texture_id = load_texture("assets/textures/blue_fish_texture.jpg");
 }
@@ -115,7 +139,7 @@ void init_fish5(Fish* fish)
     fish->rotation.x=0;
     fish->rotation.y=0;
     fish->rotation.z=0;
-
+    fish->scale=0.2;
     //load_model(&(fish->fish), "assets/models/purple_fish.obj");
     //fish->texture_id = load_texture("assets/textures/purple_fish_texture.jpg");
     load_model(&(fish->fish), "assets/models/yellow_fish.obj");
@@ -129,7 +153,7 @@ void render_fish(const Fish* fish)
     glBindTexture(GL_TEXTURE_2D, fish->texture_id);
 
     glTranslatef(fish->position.x,fish->position.y,fish->position.z);
-    glScalef(0.2,0.2,0.2);
+    glScalef(fish->scale,fish->scale,fish->scale);
 
     draw_model(&(fish->fish));
     glPopMatrix();
@@ -197,4 +221,17 @@ void render_other(const Other* other)
 
     draw_model(&(other->other));
     glPopMatrix();
+}
+bool touch(Shark* shark, Fish* fish)
+{
+    float x_tav=shark->real_position.x-fish->position.x;
+    float y_tav=shark->real_position.y-fish->position.z;
+    float z_tav=shark->real_position.z-fish->position.y;
+    float tav = sqrt(x_tav*x_tav+y_tav*y_tav+z_tav*z_tav);
+    //printf("\n %lf",tav);
+    if(tav<2)
+    {
+        return true;
+    }
+    return false;
 }

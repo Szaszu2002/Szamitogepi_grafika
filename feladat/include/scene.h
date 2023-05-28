@@ -22,6 +22,7 @@ typedef struct Scene
  */
 void init_scene(Scene* scene);
 void rend_shark(Scene* scene);
+void touch_fish(Scene* scene);
 
 /**
  * Set the lighting of the scene.
