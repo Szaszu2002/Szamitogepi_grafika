@@ -1,4 +1,5 @@
 #include "app.h"
+#include "texture.h"
 
 #include <SDL2/SDL_image.h>
 
@@ -6,7 +7,7 @@ void init_app(App* app, int width, int height)
 {
     int error_code;
     int inited_loaders;
-
+    
     app->is_running = false;
 
     error_code = SDL_Init(SDL_INIT_EVERYTHING);
@@ -42,8 +43,8 @@ void init_app(App* app, int width, int height)
 
     init_scene(&(app->scene));
     init_camera(&(app->camera), &(app->scene.shark));
-    
-
+    init_help(&(app->help));
+    app->finish_texture=load_texture("assets/textures/finish.jpg");
     app->is_running = true;
 }
 
@@ -132,14 +133,17 @@ void handle_app_events(App* app)
             case SDL_SCANCODE_L:
                 set_camera_vertical_speed(&(app->camera), -1);
                 break;
-            case SDL_SCANCODE_KP_PLUS:
+            case SDL_SCANCODE_H:
+                render_help(&(app->help));
+                SDL_GL_SwapWindow(app->window);
+                break;
+            case SDL_SCANCODE_N:
                 light_on(&(app->scene));
                 break;
-            case SDL_SCANCODE_KP_MINUS:
+            case SDL_SCANCODE_M:
                 light_off(&(app->scene));
                 break;
-            case SDL_SCANCODE_F1:
-                help(&(app->scene));
+            
             default:
                 break;
             }
@@ -219,10 +223,22 @@ void render_app(App* app)
     if (app->camera.is_preview_visible) {
         show_texture_preview();
     }
-    
+    if(app->scene.counter==0)
+    {
+        glBindTexture(GL_TEXTURE_2D, app->finish_texture);
+        show_texture_preview();
+    }
     SDL_GL_SwapWindow(app->window);
 }
-
+void render_help(Help* help)
+{
+    glBindTexture(GL_TEXTURE_2D, help->texture_id);
+    show_texture_preview();
+}
+void init_help(Help* help)
+{
+    help->texture_id = load_texture("assets/textures/help.jpg");
+}
 void destroy_app(App* app)
 {
     if (app->gl_context != NULL) {

@@ -15,10 +15,11 @@ void init_scene(Scene* scene)
     init_other2(&(scene->other[1]));
     init_other3(&(scene->other[2]));
     init_other4(&(scene->other[3]));
+    
 
-    scene->material.ambient.red = 0.0;
-    scene->material.ambient.green = 0.0;
-    scene->material.ambient.blue = 0.0;
+    scene->material.ambient.red = 0.5;
+    scene->material.ambient.green = 0.5;
+    scene->material.ambient.blue = 0.5;
 
     scene->material.diffuse.red = 1.0;
     scene->material.diffuse.green = 1.0;
@@ -30,55 +31,39 @@ void init_scene(Scene* scene)
 
     scene->material.shininess = 0.0;
     scene->power=0;
+    scene->counter=5;
 }
 // valós helyzet függvény!!!!
 
-void set_lighting()
+void set_lighting(Scene* scene)
 {
-    float ambient_light[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float diffuse_light[] = { 1.0f, 1.0f, 1.0, 1.0f };
-    float specular_light[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    float power=scene->power;
     float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, position);
 
+    float ambient_light[] = { power, power, power, 1};
+    float diffuse_light[] = { power, power, power, 1};
+    float specular_light[] = { power, power, power, 1};
+        
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
+    
 }
 void light_on(Scene* scene)
 {
-    int power=0;
     if(scene->power<1)
     {
-        power=scene->power+0.05;
         scene->power=scene->power+0.05;
-        float ambient_light[] = { power, power, power, power};
-        float diffuse_light[] = { power, power, power, power };
-        float specular_light[] = { power, power, power, power };
-        for(int i=0;i<4;i++)
-        {
-            glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
-            glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
-            glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
-        }
+        
     }
 }
 void light_off(Scene* scene)
 {
-    int power;
     if(scene->power>0.1)
     {
-        power=scene->power-0.05;
         scene->power=scene->power-0.05;
-        float ambient_light[] = { power, power, power, power};
-        float diffuse_light[] = { power, power, power, power };
-        float specular_light[] = { power, power, power, power };
-        for(int i=0;i<4;i++)
-        {
-            glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
-            glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
-            glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
-        }
+        
     }
 }
 
@@ -128,9 +113,7 @@ void render_scene(const Scene* scene)
     {
         render_other(&(scene->other[i]));
     }
-    
-    
-    set_lighting();
+    set_lighting(scene);
     draw_origin();
 }
 
@@ -165,12 +148,8 @@ void touch_fish(Scene* scene)
         {
             scene->fish[i].state=false;
             scene->shark.point++;
-            //printf("\n %lf : %lf : %lf",scene->shark.real_position.x,scene->shark.real_position.y, scene->shark.real_position.z);
+            scene->counter--;
+            printf("\n %d",scene->counter);
         }
     }
-}
-void help(Scene* scene)
-{
-    render_help(&(scene->help));
-    init_help(&(scene->help));
 }
