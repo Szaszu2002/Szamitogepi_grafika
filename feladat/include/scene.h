@@ -14,7 +14,9 @@ typedef struct Scene
     Shark shark;
     Fish fish[FISH_COUNT];
     Other other[OTHER_COUNT];
+    Help help;
     Material material;
+    float power;
 } Scene;
 
 /**
@@ -23,6 +25,9 @@ typedef struct Scene
 void init_scene(Scene* scene);
 void rend_shark(Scene* scene);
 void touch_fish(Scene* scene);
+void light_on(Scene* scene);
+void light_off(Scene* scene);
+void help(Scene* scene);
 
 /**
  * Set the lighting of the scene.

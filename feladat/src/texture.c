@@ -40,6 +40,31 @@ void render_shark(const Shark* shark)
     //printf("\nPosition: %lf : %lf ",shark->real_position.x,shark->real_position.z);
     
 }
+void render_help(Help* help)
+{
+    help->position.x=0;
+    help->position.z=0;
+    help->position.y=0;
+
+    help->rotation.x=0;
+    help->rotation.y=0;
+    help->rotation.z=0;
+
+    load_model(&(help->help), "assets/models/lap.obj");
+    help->texture_id = load_texture("assets/textures/help.jpg");
+}
+void init_help(Help* help)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, help->texture_id);
+
+    glTranslatef(help->position.x,help->position.y,help->position.z);
+    //glScalef(0.1,0.1,0.1);
+
+    draw_model(&(help->help));
+    glPopMatrix();
+}
 void init_shark(Shark* shark)
 {
     shark->relative_position.x=0;

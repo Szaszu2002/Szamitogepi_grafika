@@ -35,6 +35,13 @@ typedef struct Other
     Model other;
 
 }Other;
+typedef struct Help
+{
+    vec3 position;
+    vec3 rotation;
+    int texture_id;
+    Model help;
+}Help;
 void init_shark(Shark* shark);
 void init_fish1(Fish* fish);
 void init_fish2(Fish* fish);
@@ -54,5 +61,7 @@ void render_other(const Other* other);
 void update_shark_position(Shark* shark, const vec3* camera_position);
 void update_shark_rotation(Shark* shark, const vec3* camera_rotation);
 bool touch(Shark* shark, Fish* fish);
+void init_help(Help* help);
+void render_help(Help* help);
 
 #endif

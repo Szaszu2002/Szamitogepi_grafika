@@ -132,6 +132,14 @@ void handle_app_events(App* app)
             case SDL_SCANCODE_L:
                 set_camera_vertical_speed(&(app->camera), -1);
                 break;
+            case SDL_SCANCODE_KP_PLUS:
+                light_on(&(app->scene));
+                break;
+            case SDL_SCANCODE_KP_MINUS:
+                light_off(&(app->scene));
+                break;
+            case SDL_SCANCODE_F1:
+                help(&(app->scene));
             default:
                 break;
             }
