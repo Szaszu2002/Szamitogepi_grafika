@@ -33,6 +33,9 @@ void render_shark(const Shark* shark)
     glBindTexture(GL_TEXTURE_2D, shark->texture_id);
 
     glTranslatef(shark->relative_position.x,shark->relative_position.y,shark->relative_position.z);
+    glRotatef(shark->rotation.x, 1, 0, 0);
+    glRotatef(shark->rotation.y, 0, 1, 0);
+    glRotatef(shark->rotation.z, 0, 0, 1);
     glScalef(0.05,0.05,0.05);
 
     draw_model(&(shark->shark));
@@ -51,9 +54,9 @@ void init_shark(Shark* shark)
     shark->real_position.z=0;
     shark->real_position.y=0;
 
-    shark->rotation.x=0;
+    shark->rotation.x=-90;
     shark->rotation.y=0;
-    shark->rotation.z=0;
+    shark->rotation.z=180;
 
     shark->point=0;
 
